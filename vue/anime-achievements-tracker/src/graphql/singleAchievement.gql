@@ -1,0 +1,12 @@
+query singleAchievement($id:ID){
+  achievements(id:$id){
+    _id
+    name
+    description
+    image
+    min
+    max
+    tier
+    type
+  }
+}

@@ -1,0 +1,7 @@
+query Level($level:Int){
+    levels(level:$level){
+        level
+        min
+        max
+    }
+}

@@ -1,0 +1,10 @@
+query GroupAchievements(type:String){
+  achievements(type:$type){
+    _id
+    name
+    description
+    image
+    max
+    tier
+  }
+}

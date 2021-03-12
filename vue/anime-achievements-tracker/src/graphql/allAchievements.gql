@@ -1,0 +1,11 @@
+query allAchievements{
+  achievements{
+    name
+    description
+    image
+    max
+    tier
+    type
+    xp
+  }
+}

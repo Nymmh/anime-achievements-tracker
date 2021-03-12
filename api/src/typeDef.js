@@ -1,0 +1,121 @@
+const {gql} = require('apollo-server-express');
+
+module.exports.typeDefs = gql`
+    type Query {
+        achievements(type:AchievementsTypes,id:ID,name:String):[Achievements!]
+        profiles(alid:Int,username:String):[Profile!]
+        levels(level:Int):[Level]
+    }
+    type Mutation{
+        updateProfile(alid:Int!):[Profile]
+        createProfile(username:String!,alid:Int!):[Profile]
+    }
+    type Achievements{
+        _id:ID
+        name:String!
+        description:String!
+        min:Int!
+        max:Int
+        image:String!
+        type:AchievementsTypes!
+        tier:Int!
+        xp:Int
+    }
+    type Profile{
+        _id:ID
+        alid:Int!
+        username:String!
+        avatar:String!
+        banner:String
+        lastupdated:String!
+        xp:Int
+        level:Int
+        chuunibyou:Int
+        stats:[ProfileStats]
+        achievements:[ProfileCompleted!]
+    }
+    type Level{
+        level:Int
+        min:Int
+        max:Int
+    }
+    type ProfileStats{
+        completed:Int
+        dropped:Int
+        meanScore:String
+        minutesWatched:Int
+        episodesWatched:Int
+        magicalGirlWatched:Int
+        actionWatched:Int
+        comedyWatched:Int
+        dramaWatched:Int
+        romanceWatched:Int
+        sliceOfLifeWatched:Int
+        fantasyWatched:Int
+        supernaturalWatched:Int
+        sciFiWatched:Int
+        adventureWatched:Int
+        mysteryWatched:Int
+        ecchiWatched:Int
+        psychologicalWatched:Int
+        musicWatched:Int
+        thrillerWatched:Int
+        horrorWatched:Int
+        mechaWatched:Int
+        sportsWatched:Int
+        degenerate:Int
+        tvWatched:Int
+        movieWatched:Int
+        ovaWatched:Int
+        specialWatched:Int
+        tvshortWatched:Int
+        onaWatched:Int
+        musicFormatWatched:Int
+    }
+    type ProfileCompleted{
+        alid:Int!
+        passedtier:String
+        droppedtier:String
+        magicalgirltier:String
+        actiontier:String
+        comedytier:String
+        dramatier:String
+        romancetier:String
+        sliceOfLifetier:String
+        fantasytier:String
+        supernaturaltier:String
+        sciFitier:String
+        adventuretier:String
+        mysterytier:String
+        ecchitier:String
+        psychologicaltier:String
+        musictier:String
+        thrillertier:String
+        horrortier:String
+        mechatier:String
+        sportstier:String
+    }
+    enum AchievementsTypes{
+        PASSED
+        DROPPED
+        GHIBLI
+        MAGICAL_GIRL
+        ACTION
+        COMEDY
+        DRAMA
+        ROMANCE
+        SLICE_OF_LIFE
+        FANTASY
+        SUPERNATURAL
+        SCI_FI
+        ADVENTURE
+        MYSTERY
+        ECCHI
+        PSYCHOLOGICAL
+        MUSIC
+        THRILLER
+        HORROR
+        MECHA
+        SPORTS
+    }
+`;

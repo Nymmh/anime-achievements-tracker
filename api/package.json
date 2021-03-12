@@ -1,0 +1,41 @@
+{
+  "name": "anime-achievements-tracker-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "serve": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "author": "Nymh",
+  "license": "GNU Affero General Public",
+  "devDependencies": {
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "anitomyscript": "^2.0.4",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.8",
+    "apollo-link": "^1.2.13",
+    "apollo-link-http": "^1.5.16",
+    "apollo-link-rest": "^0.8.0-beta.0",
+    "apollo-server-express": "^2.19.2",
+    "axios": "^0.21.1",
+    "btoa": "^1.2.1",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.6.0",
+    "graphql-anywhere": "^4.2.6",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.5",
+    "moment": "^2.29.1",
+    "mongoose": "^5.9.2",
+    "node-fetch": "^2.6.1",
+    "qs": "^6.9.3",
+    "request": "^2.88.2"
+  }
+}

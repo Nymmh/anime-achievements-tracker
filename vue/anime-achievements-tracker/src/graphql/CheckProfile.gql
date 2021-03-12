@@ -1,0 +1,6 @@
+query CheckProfile($username:String){
+  profiles(username:$username){
+    alid
+    username
+  }
+}
