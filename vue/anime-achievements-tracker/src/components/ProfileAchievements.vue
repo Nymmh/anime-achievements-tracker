@@ -13,7 +13,7 @@
                             <template v-else><span :style="'width: '+(completed/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()).replace(/(_)/g,' ') +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="completed+' - Max Level'"></p>
                             </template>
@@ -40,7 +40,7 @@
                             <template v-else><span :style="'width: '+(dropped/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()).replace(/(_)/g,' ') +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="dropped+' - Max Level'"></p>
                             </template>
@@ -67,7 +67,7 @@
                             <template v-else><span :style="'width: '+(action/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()).replace(/(_)/g,' ') +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="action+' - Max Level'"></p>
                             </template>
@@ -95,7 +95,7 @@
                             <template v-else><span :style="'width: '+(adventure/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="adventure+' - Max Level'"></p>
                             </template>
@@ -124,7 +124,7 @@
                             <template v-else><span :style="'width: '+(comedy/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="comedy+' - Max Level'"></p>
                             </template>
@@ -152,7 +152,7 @@
                             <template v-else><span :style="'width: '+(drama/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="drama+' - Max Level'"></p>
                             </template>
@@ -180,7 +180,7 @@
                             <template v-else><span :style="'width: '+(ecchi/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="ecchi+' - Max Level'"></p>
                             </template>
@@ -208,7 +208,7 @@
                             <template v-else><span :style="'width: '+(fantasy/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="fantasy+' - Max Level'"></p>
                             </template>
@@ -236,7 +236,7 @@
                             <template v-else><span :style="'width: '+(horror/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="horror+' - Max Level'"></p>
                             </template>
@@ -264,7 +264,7 @@
                             <template v-else><span :style="'width: '+(magicalGirl/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="magicalGirl+' - Max Level'"></p>
                             </template>
@@ -292,7 +292,7 @@
                             <template v-else><span :style="'width: '+(mecha/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="mecha+' - Max Level'"></p>
                             </template>
@@ -320,7 +320,7 @@
                             <template v-else><span :style="'width: '+(music/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="music+' - Max Level'"></p>
                             </template>
@@ -348,7 +348,7 @@
                             <template v-else><span :style="'width: '+(mystery/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="mystery+' - Max Level'"></p>
                             </template>
@@ -376,7 +376,7 @@
                             <template v-else><span :style="'width: '+(psychological/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="psychological+' - Max Level'"></p>
                             </template>
@@ -404,7 +404,7 @@
                             <template v-else><span :style="'width: '+(romance/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="romance+' - Max Level'"></p>
                             </template>
@@ -432,7 +432,7 @@
                             <template v-else><span :style="'width: '+(sciFi/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="sciFi+' - Max Level'"></p>
                             </template>
@@ -460,7 +460,7 @@
                             <template v-else><span :style="'width: '+(sliceOfLife/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()).replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,letter=>letter.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="sliceOfLife+' - Max Level'"></p>
                             </template>
@@ -488,7 +488,7 @@
                             <template v-else><span :style="'width: '+(sports/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="sports+' - Max Level'"></p>
                             </template>
@@ -516,7 +516,7 @@
                             <template v-else><span :style="'width: '+(supernatural/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>lt.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="supernatural+' - Max Level'"></p>
                             </template>
@@ -544,7 +544,7 @@
                             <template v-else><span :style="'width: '+(thriller/data.achievements[0].max)*100+'%'"></span></template>
                         </div>
                         <div id="achinfo">
-                            <p v-text="data.achievements[0].type +' - '+'Tier: '+data.achievements[0].tier"></p>
+                            <p v-text="data.achievements[0].type.replace(/(_)/g,' ').replace(/(_)/g,' ').toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g,lt=>ly.toUpperCase()) +' - '+'Tier: '+data.achievements[0].tier"></p>
                             <template v-if="data.achievements[0].max == null">
                                 <p v-text="thriller+' - Max Level'"></p>
                             </template>
