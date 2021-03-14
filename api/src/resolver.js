@@ -26,7 +26,9 @@ module.exports = {
                     let data = Profiles.find({alid:args.alid});
                     return data
                 }else if(args.username){
-                    let data = Profiles.find({username:args.username});
+                    let username = args.username.toLowerCase().charAt(0).toUpperCase()+args.username.slice(1)
+                    console.log(username)
+                    let data = Profiles.find({username:username});
                     return data
                 }else{
                     let data = Profiles.find();

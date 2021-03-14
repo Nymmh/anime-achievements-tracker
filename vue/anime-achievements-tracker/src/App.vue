@@ -23,10 +23,7 @@ export default {
 *{
   box-sizing: border-box;
 }
-p{
-    color: #cadbec;
-}
-h2{
+p,h1,h2{
     color: #cadbec;
 }
 body{

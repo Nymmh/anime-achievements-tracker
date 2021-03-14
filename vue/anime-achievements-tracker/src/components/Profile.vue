@@ -1,4 +1,6 @@
 <template>
+<div>
+    <navbar/>
     <ApolloQuery :query="require('../graphql/Profile.gql')" :variables="{username:username}">
     <template v-slot="{result:{loading,error,data}}">
         <template v-if="loading"><div><loading/></div></template>
@@ -29,11 +31,16 @@
                 <template v-slot="{result:{loading,error,data}}">
                     <template v-if="loading"><div><loading/></div></template>
                     <template v-else-if="error">Error Loading</template>
-                    <template>
+                    <template v-else-if="data">
                         <div style="margin:0;">
                             <div id="xparea" class="grid-container-xp">
                                 <p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Level: '+level"></p>
-                                <div style="padding-top:4.5%"><div class="meterxp xp nostripes"><span :style="'width: '+ (xp/data.levels[0].max)*100 +'%'"></span></div></div>
+                                <template v-if="((xp/data.levels[0].max)*100)>100">
+                                    <div style="padding-top:4.5%"><div class="meterxp xp nostripes"><span :style="'width: 100%'"></span></div></div>
+                                </template>
+                                <template v-else>
+                                    <div style="padding-top:4.5%"><div class="meterxp xp nostripes"><span :style="'width: '+ ((xp/data.levels[0].max)*100) +'%'"></span></div></div>
+                                </template>
                                 <p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Chuunibyou: '+chuunibyou"></p>
                             </div>
                         </div>
@@ -58,15 +65,17 @@
         </template>
     </template>
     </ApolloQuery>
+    </div>
 </template>
 <script>
 import Loading from './loading.vue'
 import ProfileAchievements from './ProfileAchievements.vue'
+import SearchBar from './Searchbar.vue'
 import axios from 'axios'
 import moment from 'moment'
 export default {
     name: "Profile",
-    components:{'loading':Loading,'profileAchievements':ProfileAchievements},
+    components:{'loading':Loading,'profileAchievements':ProfileAchievements,'navbar':SearchBar},
     props:['username'],
     data(){
         return{
@@ -80,38 +89,10 @@ export default {
         }
     },
     mounted(){
-        axios({
-            url:"https://anime-achievements-tracker.herokuapp.com/graphql",
-            method:'post',
-            data:{
-                query:
-                    `query getCompleted($username:String){
-                        profiles(username:$username){
-                            alid
-                            xp
-                            chuunibyou
-                            level
-                            lastupdated
-                            stats{
-                            completed
-                            }
-                        }
-                    }`,
-                variables:{
-                    username:this.username
-                }
-            },
-            headers:{
-                'Content-Type':'application/json'
-            }
-        }).then(result=>{
-            this.alid = result.data.data.profiles[0].alid;
-            this.completed = result.data.data.profiles[0].stats[0].completed;
-            this.xp = result.data.data.profiles[0].xp;
-            this.chuunibyou = result.data.data.profiles[0].chuunibyou;
-            this.level = result.data.data.profiles[0].level;
-            this.lastUpdated = moment.unix(Number(result.data.data.profiles[0].lastupdated)).fromNow();
-        })
+        this.updateData();
+    },
+    updated(){
+        this.updateData();
     },
     methods:{
         update: function (alid){
@@ -148,6 +129,40 @@ export default {
                     });
                 }
             });
+        },
+        updateData: function(){
+            axios({
+            url:"https://anime-achievements-tracker.herokuapp.com/graphql",
+            method:'post',
+            data:{
+                query:
+                    `query getCompleted($username:String){
+                        profiles(username:$username){
+                            alid
+                            xp
+                            chuunibyou
+                            level
+                            lastupdated
+                            stats{
+                            completed
+                            }
+                        }
+                    }`,
+                variables:{
+                    username:this.username
+                }
+            },
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }).then(result=>{
+            this.alid = result.data.data.profiles[0].alid;
+            this.completed = result.data.data.profiles[0].stats[0].completed;
+            this.xp = result.data.data.profiles[0].xp;
+            this.chuunibyou = result.data.data.profiles[0].chuunibyou;
+            this.level = result.data.data.profiles[0].level;
+            this.lastUpdated = moment.unix(Number(result.data.data.profiles[0].lastupdated)).fromNow();
+        })
         }
     }
 }
