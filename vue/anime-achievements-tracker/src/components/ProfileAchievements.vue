@@ -591,7 +591,14 @@ export default {
         }
     },
     mounted(){
-        axios({
+        this.updateAchievementData();
+    },
+    updated(){
+        this.updateAchievementData();
+    },
+    methods:{
+        updateAchievementData: function(){
+            axios({
             url:"https://anime-achievements-tracker.herokuapp.com/graphql",
             method:'post',
             data:{
@@ -649,6 +656,7 @@ export default {
             this.mecha = result.data.data.profiles[0].stats[0].mechaWatched;
             this.sports = result.data.data.profiles[0].stats[0].sportsWatched;
         })
+        }
     }
 }
 </script>
