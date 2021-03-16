@@ -4,7 +4,7 @@ exports.createProfile = (username,alid)=>{
     createProfile(username,alid)
 }
 function createProfile(username,alid){
-    Profiles.find({username:username},(err,res)=>{
+    Profiles.find({username:{$regex:username, $options: 'i'}},(err,res)=>{
         if(!err){
             if(!res[0]){
                 console.log('No profile, creating')
