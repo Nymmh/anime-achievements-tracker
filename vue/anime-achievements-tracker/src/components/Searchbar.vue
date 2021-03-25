@@ -2,7 +2,8 @@
     <header>
       <nav>
         <div class="search">
-            <form action="" v-on:submit.prevent="onSubmit">
+            <div><router-link :to="{name:'Compare'}" style="line-height: 100%;vertical-align: middle;"><span style="vertical-align: middle;">Compare</span></router-link></div>
+            <form action="" v-on:submit.prevent="onSubmit" style="margin:auto;">
                 <input type="search" name="username" v-model="username" placeholder="AniList Username" class="searchtext">
                 <input type="submit" value="Search" class="btn">
             </form>
@@ -36,6 +37,10 @@ nav{
     padding-top: 1%;
     padding-bottom: 1%;
     margin-right: 13%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
 }
 .searchtext{
     border-radius: 5px 0 0 5px;

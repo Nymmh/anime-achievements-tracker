@@ -29,6 +29,15 @@ const router = new Router({
                 title:"AAT - Profile"
             }
         },
+        {
+            path: '/compare',
+            name: 'Compare',
+            props: true,
+            component: ()=>import('./components/Compare.vue'),
+            meta:{
+                title:"AAT - Compare"
+            }
+        },
     ],
     mode: 'history',
 });

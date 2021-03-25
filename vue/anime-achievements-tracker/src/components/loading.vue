@@ -88,8 +88,16 @@ export default {
         };
     },
     created(){
-        const idx = Math.floor(Math.random() * this.emojis.length)
-        this.getEmoji = this.emojis[idx]
+        this.loading();
+    },
+    updated(){
+        this.loading();
+    },
+    methods:{
+        loading:function(){
+            const idx = Math.floor(Math.random() * this.emojis.length)
+            this.getEmoji = this.emojis[idx]
+        }
     }
 }
 </script>
