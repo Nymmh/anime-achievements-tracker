@@ -16,7 +16,6 @@
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
     "axios": "^0.21.1",
-    "axois": "0.0.1-security",
     "core-js": "^3.6.5",
     "graphql-type-json": "^0.2.1",
     "lowdb": "^1.0.0",
