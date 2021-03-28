@@ -33,7 +33,7 @@
     "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.5",
     "moment": "^2.29.1",
-    "mongoose": "^5.9.2",
+    "mongoose": "^5.12.2",
     "node-fetch": "^2.6.1",
     "qs": "^6.9.3",
     "request": "^2.88.2"
