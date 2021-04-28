@@ -1,7 +1,8 @@
 <template>
     <div><navbar/>
-        <notifications classes="vue_notifications vue_notification_failed" group="failedSearch" position="top center" width="400"/>
-        <notifications classes="vue_notifications vue_notification_success" group="addingSearch" position="top center" width="400"/>
+        <notifications classes="vue_notifications vue_notification_failed" group="failed" position="top center" width="400"/>
+        <notifications classes="vue_notifications vue_notification_success" group="adding" position="top center" width="400"/>
+
         <div class="grid">
             <div class="container">
                 <form action="" v-on:submit.prevent="searchProfile" style="position: relative;top: 25%;">
@@ -160,8 +161,13 @@ export default {
                         for(let gr in genre2){
                             this.userdata.user2.anime.genres.push({genre:genre2[gr].genre,count:genre2[gr].count,meanscore:genre2[gr].meanScore,minutes:genre2[gr].minutesWatched})
                         }
-                    })
-                    this.getLists();
+                        this.getLists();
+                    }).catch(e=>{
+                        this.requestError(e)
+                    });
+                    
+                }).catch(e=>{
+                    this.requestError(e)
                 })
             }
             }
@@ -236,6 +242,30 @@ export default {
                     });
                 });
             }
+        },
+        requestError:function(e){
+            this.loadingShow = false;
+            if(e.response){
+                if(e.response.statusText == "Not Found"){
+                    this.$notify({
+                        group: 'failed',
+                        text: `Looks like AniList hit an error trying to find one of the searched profiles`,
+                        max:2
+                    });
+                }
+            }else if(e.request){
+                this.$notify({
+                    group: 'failed',
+                    text: `Looks like we hit an error trying query AniList`,
+                    max: 2
+                });
+            }else{
+                this.$notify({
+                    group: 'failed',
+                    text: `Looks like we hit an unexpected error`,
+                    max:2
+                });
+            }
         }
     }
 }
@@ -307,14 +337,14 @@ a{
 .btn:hover{
     border: 1px solid #cadbec;
 }
-.profileimg{
+.profileimgComp{
     right: 0 !important;
     position: relative !important;
     margin-top: 3% !important;
     max-width: 100px !important;
     max-height: 100px !important;
 }
-.profilename{
+.profilenameComp{
     text-align: left !important;
     margin-top: -24% !important;
     margin-left: 65% !important;

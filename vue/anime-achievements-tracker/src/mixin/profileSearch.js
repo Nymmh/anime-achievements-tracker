@@ -90,13 +90,7 @@ export const profileSearch = {
                         }
                     }).catch(e=>{
                         if(e.response){
-                            if(e.response.data.data.User){
-                                this.$notify({
-                                    group: 'failed',
-                                    text: `Looks like AniList couldn't find that profile`,
-                                    max:2
-                                });
-                            }else{
+                            if(e.response.statusText == "Not Found"){
                                 this.$notify({
                                     group: 'failed',
                                     text: `Looks like AniList hit an error trying to find that profile`,

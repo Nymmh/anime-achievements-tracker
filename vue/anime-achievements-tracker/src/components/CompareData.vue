@@ -7,9 +7,9 @@
             <div class="usercontainer" id="user1" v-show="pageuserdata">
                 <div class="usergrid">
                     <a v-bind:href="'https://anilist.co/user/'+this.userdata.user1.name" target="_blank"> 
-                        <img v-bind:src="this.userdata.user1.avatar" alt="" class="profileimg">
+                        <img v-bind:src="this.userdata.user1.avatar" alt="" class="profileimgComp">
                     </a>
-                    <h1 v-text="this.userdata.user1.name" class="profilename"></h1>
+                    <h1 v-text="this.userdata.user1.name" class="profilenameComp"></h1>
                     <template v-if="this.userdata.user1.anime.meanscore > this.userdata .user2.anime.meanscore"><div class="greenbackground"><p class="comptext" v-text="'Mean Score: '+this.userdata .user1.anime.meanscore"></p></div></template>
                     <template v-if="this.userdata.user1.anime.meanscore < this.userdata .user2.anime.meanscore"><div class="redbackground"><p class="comptext" v-text="'Mean Score: '+this.userdata  .user1.anime.meanscore"></p></div></template>
                     <template v-if="this.userdata.user1.anime.count > this.userdata .user2.anime.count"><div class="greenbackground"><p class="comptext" v-text="'Completed: '+this.userdata .user1.anime.count"></p></div></template>
@@ -53,9 +53,9 @@
             <div class="usercontainer" id="user2" v-show="pageuserdata">
                 <div class="usergrid">
                     <a v-bind:href="'https://anilist.co/user/'+this.userdata.user2.name" target="_blank"> 
-                        <img v-bind:src="this.userdata.user2.avatar" alt="" class="profileimg">
+                        <img v-bind:src="this.userdata.user2.avatar" alt="" class="profileimgComp">
                     </a>
-                    <h1 v-text="this.userdata.user2.name" class="profilename"></h1>
+                    <h1 v-text="this.userdata.user2.name" class="profilenameComp"></h1>
                     <template v-if="this.userdata.user1.anime.meanscore < this.userdata.user2.anime.meanscore"><div class="greenbackground"><p class="comptext" v-text="'Mean Score: '+this.userdata.user2.anime.meanscore"></p></div></template>
                     <template v-if="this.userdata.user1.anime.meanscore > this.userdata.user2.anime.meanscore"><div class="redbackground"><p class="comptext" v-text="'Mean Score: '+this.userdata.user2.anime.meanscore"></p></div></template>
                     <template v-if="this.userdata.user1.anime.count > this.userdata.user2.anime.count"><div class="redbackground"><p class="comptext" v-text="'Completed: '+this.userdata.user2.anime.count"></p></div></template>
