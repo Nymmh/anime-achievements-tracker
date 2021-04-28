@@ -95,6 +95,10 @@ export default {
             if(this.username1 && this.username2){
                 this.loadingShow = true;
                 this.pageuserdata = false;
+                this.commonanime = {anime:[]};
+                this.userdata = {user1:{name:"",avatar:"",anime:{count:0,episodes:0,minutes:0,meanscore:0,planning:0,current:0,formats:[],genres:[]}},user2:{name:"",avatar:"",anime:{count:0,episodes:0,minutes:0,meanscore:0,planning:0,current:0,formats:[],genres:[]}}};
+                this.scorediff = 0;
+                this.compatibility = 0;
                 if(this.username1){
                 axios({
                     url:"https://graphql.anilist.co",
