@@ -96,6 +96,39 @@
                     </template>
                 </div>
             </div>
+            <div style="grid-column: 1/3; width:95%;cursor: pointer;" class="container" id="compatibility" v-show="this.pageuserdata" @click="showcommonanime=!showcommonanime">
+                <p class="comptext" style="padding:0;position: relative;top: 30%;" v-text="'Common Anime'"></p> 
+            </div>
+            <div class="usercontainer" id="commonanime" v-show="showcommonanime" style="grid-column:1/3;width:95%;color:white;">
+            <template v-for="an in this.commonanime.anime">
+                <div :key="an.id" class="commonanimegrid">
+                    <a v-bind:href="'https://anilist.co/anime/'+an.id" target="_blank" rel="noopener noreferrer"><p class="comptext" v-text="an.title"></p></a>
+                    <div>
+                        <template v-if="an.fav1"><div v-html="'<p>'+userdata.user1.name +' Score:' + an.score1+'<span style=color:#e89090;> &#10084;</span>'+'</p>'"></div></template>
+                        <template v-else><div v-html="'<p>'+userdata.user1.name +' Score:' + an.score1"></div></template>
+                    </div>
+                    <div>
+                        <template v-if="an.fav2"><div v-html="'<p>'+userdata.user2.name +' Score:' + an.score2+'<span style=color:#e89090;> &#10084;</span>'+'</p>'"></div></template>
+                        <template v-else><div v-html="'<p>'+userdata.user2.name +' Score:' + an.score2"></div></template>
+                    </div>
+                    <template v-if="an.score1 < an.score2">
+                        <div class="greenbackground">
+                            <p v-text="'Difference: +'+an.diff"></p>
+                        </div>
+                    </template>
+                    <template v-if="an.score1 > an.score2">
+                        <div class="redbackground">
+                            <p v-text="'Difference: -'+an.diff"></p>
+                        </div>
+                    </template>
+                    <template v-if="an.score1 == an.score2">
+                        <div class="greybackground">
+                            <p v-text="'Difference: '+an.diff"></p>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            </div>
     </div>
 </template>
 <script>
@@ -103,7 +136,12 @@ import Loading from './loading.vue'
 export default {
     name: "CompareData",
     components:{'loading':Loading},
-    props:['userdata','loadingShow','pageuserdata','compatibility'],
+    props:['userdata','loadingShow','pageuserdata','compatibility','commonanime','fav1','fav2'],
+    data(){
+        return{
+            showcommonanime:false
+        }
+    }
 }
 </script>
 <style>

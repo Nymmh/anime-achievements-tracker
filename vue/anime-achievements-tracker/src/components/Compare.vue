@@ -17,7 +17,7 @@
                 </form>
             </div>
         </div>
-            <comparedata :userdata.sync="this.userdata" :loadingShow.sync="loadingShow" :pageuserdata.sync="pageuserdata" :compatibility.sync="this.compatibility"/>
+            <comparedata :userdata.sync="this.userdata" :loadingShow.sync="loadingShow" :pageuserdata.sync="pageuserdata" :compatibility.sync="this.compatibility" :commonanime="this.commonanime"/>
     </div>
 </template>
 <script>
@@ -66,12 +66,24 @@ let listQuery = `query($username:String){
             entries{
                 mediaId
                 score
+                media{
+                    title{
+                        romaji
+                    }
+                }
             }
         }
     }
     User(name:$username){
         mediaListOptions{
             scoreFormat
+        }
+        favourites{
+            anime{
+                nodes{
+                    id
+                }
+            }
         }
     }
 }`;
@@ -190,6 +202,7 @@ export default {
                 }).then(user1ListRes => {
                     let List = user1ListRes.data.data.MediaListCollection.lists[0];
                     let user1ScoreFormat = user1ListRes.data.data.User.mediaListOptions.scoreFormat;
+                    let user1Favourites = user1ListRes.data.data.User.favourites.anime.nodes;
                     axios({
                         url: "https://graphql.anilist.co",
                         method: 'post',
@@ -205,8 +218,11 @@ export default {
                     }).then(user2ListRes => {
                         let List2 = user2ListRes.data.data.MediaListCollection.lists[0];
                         let user2ScoreFormat = user2ListRes.data.data.User.mediaListOptions.scoreFormat;
+                        let user2Favourites = user2ListRes.data.data.User.favourites.anime.nodes;
                         for(let li in List.entries){
                             for(let lt in List2.entries){
+                                let favourite1 = false;
+                                let favourite2 = false;
                                 if(List.entries[li].mediaId === List2.entries[lt].mediaId){
                                     var score1 = List.entries[li].score || 0,
                                         score2 = List2.entries[lt].score || 0
@@ -228,8 +244,14 @@ export default {
                                         if(score2 == 2) score2 = 50;
                                         else if(score2 == 3) score2 = 100;
                                     }
+                                    for(let fv in user1Favourites){
+                                        if(List.entries[li].mediaId == user1Favourites[fv].id)favourite1 = true;
+                                    }
+                                    for(let fvr in user2Favourites){
+                                        if(List.entries[li].mediaId == user2Favourites[fvr].id)favourite2 = true;
+                                    }
                                     let scoreDiff = Math.abs(score1 - score2)
-                                    this.commonanime.anime.push({id:List.entries[li].mediaId,score1:score1,score2:score2,diff:scoreDiff});
+                                    this.commonanime.anime.push({id:List.entries[li].mediaId,score1:score1,score2:score2,diff:scoreDiff,title:List.entries[li].media.title.romaji,fav1:favourite1,fav2:favourite2});
                                     this.scorediff = (this.scorediff + scoreDiff);
                                 }
                             }
@@ -312,6 +334,13 @@ a{
   gap: 1vh 0px;
   padding-bottom: 2%;
 }
+.commonanimegrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1vh 0px;
+  padding-bottom: 2%;
+}
 .searchtext{
     border-radius: 5px 0 0 5px;
     border: none;
@@ -361,6 +390,10 @@ a{
 }
 .greenbackground{
     background-color: rgba(0, 255, 0, 0.2);
+    height: 5vh;
+}
+.greybackground{
+    background-color: rgba(129, 131, 133, 0.2);
     height: 5vh;
 }
 .comptext{
