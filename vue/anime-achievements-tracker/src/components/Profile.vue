@@ -23,12 +23,12 @@
                             <h1 v-text="data.profiles[0].username" class="profilename"></h1>
                         </a>
                     </div>
-                    <div style="float:right;position:relative;right:15%;margin-top:8.1%;">
+                    <div style="float:right;position:relative;right:15%;margin-top:8.1%;" class="mobileupdate">
                         <div v-on:click="update(alid)" style="position:relative;top: -1px;z-index:1000;cursor: pointer;width:19vh;"><p class="updateButton">Update</p></div>
                         <div style="position:relative;top: -5px;left: 110%;"><p class="lastUpdateText" v-text="'Last Update: '+lastUpdated"></p></div>
                     </div>
                 </div>
-                <ApolloQuery :query="require('../graphql/getLevel.gql')" :variables="{level:data.profiles[0].level}" style="max-height:100px;position:relative;top:-22vh;">
+                <ApolloQuery :query="require('../graphql/getLevel.gql')" :variables="{level:data.profiles[0].level}" style="max-height:100px;position:relative;top:-22vh;" class="mobilelevel">
                 <template v-slot="{result:{loading,error,data}}">
                     <template v-if="loading"><div><loading/></div></template>
                     <template v-else-if="error">Error Loading</template>
@@ -48,7 +48,7 @@
                     </template>
                 </template>
                 </ApolloQuery>
-                <div id="animeStats" style="position:relative;top:-19vh;">
+                <div id="animeStats" style="position:relative;top:-19vh;" class="mobileanime">
                     <div class="grid-container-stats">
                         <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Anime</h2></div>
                         <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Completed: '+data.profiles[0].stats[0].completed" ref="completedNumber"></p></div>
@@ -56,13 +56,13 @@
                         <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Episodes Watched: '+data.profiles[0].stats[0].episodesWatched"></p></div>
                     </div>
                 </div>
-                <div id="achievements" style="position:relative;top:-16vh;cursor: pointer;" @click="showAchievements =! showAchievements">
+                <div id="achievements" style="position:relative;top:-16vh;cursor: pointer;" @click="showAchievements =! showAchievements" class="mobileachivements">
                     <div class="grid-container-ach">
                         <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Achievements</h2></div>
                     </div>
                 </div>
-                <profileAchievements :data="data" :completed="completed" :username="username" v-show="showAchievements"/>
-                <div id="charts" style="position:relative;top:-13vh;cursor: pointer;" @click="showCharts =! showCharts">
+                <profileAchievements :data="data" :completed="completed" :username="username" v-show="showAchievements" class="mobileachivementsarea"/>
+                <div id="charts" style="position:relative;top:-13vh;cursor: pointer;" @click="showCharts =! showCharts" class="chartsmobile">
                     <div class="grid-container-ach">
                         <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Charts</h2></div>
                     </div>
@@ -388,5 +388,170 @@ a{
 }
 .xp > span {
     background-image: linear-gradient(#cadbec, #cadbec);
+}
+@media only screen and (max-width: 1024px){
+p{
+    font-size: 15px !important;
+}
+.profileimg{
+    max-width:100px;
+}
+.profilename{
+    font-size: 30px;
+}
+.profiletop{
+    top: -24vh;
+}
+.mobileupdate{
+    right: 65% !important;
+    margin-top: -6% !important
+}
+.updateButton{
+    font-size: 15px;
+}
+.lastUpdateText{
+    font-size: 12px;
+}
+.mobilelevel{
+    top: -36vh !important;
+}
+.grid-container-xp{
+    height: 45px;
+}
+.mobileanime{
+    top: -35vh !important;
+}
+.mobileachivements{
+    top: -34vh !important;
+}
+.grid-container-ach{
+    height: 43px;
+}
+.chartsmobile{
+    top: -33vh !important;
+}
+.mobileachivementsarea{
+    top: -33vh !important;
+}
+.grid-container-achievements{
+grid-template-columns:1fr 1fr !important;
+}
+.achImage{
+width:150px;
+}
+.grid-container-charts{
+top: -32vh !important;
+height: 50vh; 
+}
+}
+@media only screen and (max-width: 768px){
+p{
+    font-size: 15px !important;
+}
+.profileimg{
+    max-width:100px;
+}
+.profilename{
+    font-size: 30px;
+}
+.profiletop{
+    top: -24vh;
+}
+.mobileupdate{
+    right: 65% !important;
+    margin-top: -10% !important
+}
+.updateButton{
+    font-size: 15px;
+}
+.lastUpdateText{
+    font-size: 12px;
+}
+.mobilelevel{
+    top: -36vh !important;
+}
+.grid-container-xp{
+    height: 32px;
+}
+.mobileanime{
+    top: -35vh !important;
+}
+.mobileachivements{
+    top: -34vh !important;
+}
+.grid-container-ach{
+    height: 43px;
+}
+.chartsmobile{
+    top: -33vh !important;
+}
+.mobileachivementsarea{
+    top: -33vh !important;
+}
+.grid-container-achievements{
+grid-template-columns:1fr 1fr !important;
+}
+.achImage{
+width:150px;
+}
+.grid-container-charts{
+top: -32vh !important;
+height: 50vh; 
+}
+}
+@media only screen and (max-width: 415px){
+p{
+    font-size: 15px !important;
+}
+.profileimg{
+    max-width:100px;
+}
+.profilename{
+    font-size: 30px;
+}
+.profiletop{
+    top: -24vh;
+}
+.mobileupdate{
+    right: 58% !important;
+    margin-top: -20% !important
+}
+.updateButton{
+    font-size: 15px;
+}
+.lastUpdateText{
+    font-size: 12px;
+}
+.mobilelevel{
+    top: -29vh !important;
+}
+.grid-container-xp{
+    height: 32px;
+}
+.mobileanime{
+    top: -28vh !important;
+}
+.mobileachivements{
+    top: -27vh !important;
+}
+.grid-container-ach{
+    height: 43px;
+}
+.chartsmobile{
+    top: -26vh !important;
+}
+.mobileachivementsarea{
+    top: -26vh !important;
+}
+.grid-container-achievements{
+grid-template-columns:1fr !important;
+}
+.achImage{
+width:150px;
+}
+.grid-container-charts{
+top: -25vh !important;
+height: 80vh; 
+}
 }
 </style>

@@ -84,4 +84,31 @@ a{
 .btn:hover{
     border: 1px solid #cadbec;
 }
+@media only screen and (max-width: 420px){
+.searchtextHome{
+    border-radius: 5px 0 0 5px;
+    border: none;
+    outline-color: #334661;
+    background-color: #334661;
+    color:#cadbec;
+    width: 35vh;
+    padding: .5vh;
+}
+}
+@media only screen and (max-width: 413px){
+.btn {
+    border: none;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #3e5871;
+    color: #cadbec;
+    cursor: pointer;
+    margin-top: 2%;
+}
+}
+@media only screen and (max-width: 375px){
+.btn {
+    padding-top: 2%;
+    padding-bottom: 8%;
+}
+}
 </style>

@@ -412,4 +412,55 @@ a{
     padding-top:3%;
     padding-bottom: 3%;
 }
+@media only screen and (max-width: 1024px){
+.profilenameComp{
+    font-size: 30px !important;
+}
+.comptext{
+font-size: 15px !important;
+}
+.usercontainer{
+    padding-right: 0 !important;
+}
+.grid{
+    max-width: 100% !important;
+}
+.commonanimegrid{
+gap: 1vh 1vh !important;
+}
+}
+@media only screen and (max-width: 768px){
+.profilenameComp{
+    font-size: 30px !important;
+}
+.comptext{
+font-size: 15px !important;
+}
+.usercontainer{
+    padding-right: 0 !important;
+}
+.grid{
+    max-width: 100% !important;
+}
+.commonanimegrid{
+gap: 1vh 1vh !important;
+}
+}
+@media only screen and (max-width: 415px){
+.profilenameComp{
+    font-size: 30px !important;
+}
+.comptext{
+font-size: 15px !important;
+}
+.usercontainer{
+    padding-right: 3vh !important;
+}
+.grid{
+    max-width: 100% !important;
+}
+.commonanimegrid{
+gap: 1vh 1vh !important;
+}
+}
 </style>

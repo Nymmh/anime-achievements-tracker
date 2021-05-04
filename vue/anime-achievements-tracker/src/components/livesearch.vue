@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div style="top:5vh;right: 51.8vh;" class="searchcontainer" id="livesearchbar" v-show="search.length>0">
+        <div style="top:5vh;right: 51.8vh;" class="searchcontainer mobilesize" id="livesearchbar" v-show="search.length>0">
             <template v-for="sr in this.search" >
                 <div :key="search[sr]"><router-link :to="{name:'Profile',params:{username:sr.toLowerCase().charAt(0).toUpperCase()+sr.slice(1)}}">{{sr}}</router-link></div>
             </template>
@@ -64,5 +64,113 @@ a{
   padding-bottom: .5vh;
   z-index:1;
   color: #cadbec;
+}
+@media only screen and (max-width: 3840px){
+.mobilesize{
+top: 8% !important;
+right: 32% !important;
+}
+.searchcontainer{
+  width:35%;
+}
+}
+@media only screen and (max-width: 1440px){
+.mobilesize{
+top: 14% !important;
+right: 32% !important;
+}
+.searchcontainer{
+  width:35%;
+}
+}
+@media only screen and (max-width: 1280px){
+.mobilesize{
+top: 14% !important;
+right: 32% !important;
+}
+.searchcontainer{
+  width:35%;
+}
+}
+@media only screen and (max-width: 1025px){
+.mobilesize{
+top: 9% !important;
+right: 32% !important;
+}
+.searchcontainer{
+  width:35%;
+}
+}
+@media only screen and (max-width: 835px){
+.mobilesize{
+top: 10% !important;
+right: 32% !important;
+}
+.searchcontainer{
+  position: absolute;
+  background-color: #334661;
+  width:35%;
+  border-radius: 5px;
+  padding-top: 1vh;
+  padding-bottom: .5vh;
+  z-index:1;
+  color: #cadbec;
+}
+}
+@media only screen and (max-width: 768px){
+.mobilesize{
+top: 11% !important;
+right: 32% !important;
+}
+}
+@media only screen and (max-width: 420px){
+.searchcontainer{
+  position: absolute;
+  background-color: #334661;
+  width:70%;
+  border-radius: 5px;
+  padding-top: 1vh;
+  padding-bottom: .5vh;
+  z-index:1;
+  color: #cadbec;
+}
+.mobilesize{
+top: 18.5% !important;
+right: 18% !important;
+}
+}
+@media only screen and (max-width: 413px){
+.searchcontainer{
+  position: absolute;
+  background-color: #334661;
+  width:70%;
+  border-radius: 5px;
+  padding-top: 1vh;
+  padding-bottom: .5vh;
+  z-index:1;
+  color: #cadbec;
+}
+.mobilesize{
+top: 22% !important;
+right: 15% !important;
+}
+}
+@media only screen and (max-width: 375px){
+.mobilesize{
+top: 24% !important;
+right: 15% !important;
+}
+}
+@media only screen and (max-width: 320px){
+.mobilesize{
+top: 33% !important;
+right: 15% !important;
+}
+}
+@media only screen and (max-width: 241px){
+.mobilesize{
+top: 69% !important;
+right: 15% !important;
+}
 }
 </style>
