@@ -1,12 +1,5 @@
 <template>
   <div id="app">
-    <!-- <header>
-      <nav>
-        <div>
-          <div><a href=""><strong>website</strong></a></div>
-        </div>
-      </nav>
-    </header> -->
     <router-view></router-view>
   </div>
 </template>
@@ -23,7 +16,7 @@ export default {
 *{
   box-sizing: border-box;
 }
-p,h1,h2{
+p,h1,h2,label{
     color: #cadbec;
 }
 body{

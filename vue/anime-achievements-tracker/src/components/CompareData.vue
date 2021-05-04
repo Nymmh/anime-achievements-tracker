@@ -1,6 +1,6 @@
 <template>
     <div class="grid">
-        <div v-show="this.loadingShow" style="grid-column:1/3;max-width:100%;margin:auto;"><loading/></div>
+        <div v-show="this.loadingShow" style="grid-column:1/3;max-width:100%;margin:auto;"><loading :key="loadingkey"/></div>
         <div style="grid-column: 1/3; width:95%;" class="container" id="compatibility" v-show="this.pageuserdata">
             <p class="comptext" style="padding:0;position: relative;top: 30%;" v-text="'Compatibility: ' + this.compatibility+'%'"></p> 
         </div>
@@ -136,7 +136,7 @@ import Loading from './loading.vue'
 export default {
     name: "CompareData",
     components:{'loading':Loading},
-    props:['userdata','loadingShow','pageuserdata','compatibility','commonanime','fav1','fav2'],
+    props:['userdata','loadingShow','pageuserdata','compatibility','commonanime','loadingkey'],
     data(){
         return{
             showcommonanime:false

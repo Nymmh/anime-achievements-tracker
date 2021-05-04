@@ -1,5 +1,5 @@
 <template>
-    <div style="position:relative;top:-13vh;"><div v-for="ach in data.profiles[0].achievements" :key="ach._id" class="grid-container-achievements">
+    <div style="position:relative;top:-13vh;padding-bottom:3vh;"><div v-for="ach in data.profiles[0].achievements" :key="ach._id" class="grid-container-achievements">
         <ApolloQuery :query="require('../graphql/singleAchievement.gql')" :variables="{id:ach.passedtier}">
             <template v-slot="{result:{loading,error,data}}">
                 <template v-if="loading"><div><loading/></div></template>
@@ -587,7 +587,7 @@ export default {
             thriller:0,
             horror:0,
             mecha:0,
-            sports:0
+            sports:0,
         }
     },
     mounted(){

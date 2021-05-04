@@ -2,7 +2,6 @@
     <div><navbar/>
         <notifications classes="vue_notifications vue_notification_failed" group="failed" position="top center" width="400"/>
         <notifications classes="vue_notifications vue_notification_success" group="adding" position="top center" width="400"/>
-
         <div class="grid">
             <div class="container">
                 <form action="" v-on:submit.prevent="searchProfile" style="position: relative;top: 25%;">
@@ -17,7 +16,7 @@
                 </form>
             </div>
         </div>
-            <comparedata :userdata.sync="this.userdata" :loadingShow.sync="loadingShow" :pageuserdata.sync="pageuserdata" :compatibility.sync="this.compatibility" :commonanime="this.commonanime"/>
+            <comparedata :userdata.sync="this.userdata" :loadingShow.sync="loadingShow" :pageuserdata.sync="pageuserdata" :compatibility.sync="this.compatibility" :commonanime="this.commonanime" :loadingkey="this.loadingkey"/>
     </div>
 </template>
 <script>
@@ -101,11 +100,13 @@ export default {
             compatibility:0,
             loadingShow:false,
             pageuserdata:false,
+            loadingkey:0,
         }
     },
     methods:{
         searchProfile: function(){
             if(this.username1 && this.username2){
+                this.loadingkey += 1;
                 this.loadingShow = true;
                 this.pageuserdata = false;
                 this.commonanime = {anime:[]};
@@ -182,6 +183,12 @@ export default {
                     this.requestError(e)
                 })
             }
+            }else{
+                this.$notify({
+                    group: 'failed',
+                    text: `Make sure you have both search fields filled`,
+                    max:2
+                });
             }
         },
         getLists:function(){
@@ -295,6 +302,9 @@ export default {
 <style>
 *{
     font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    margin-bottom: 10vh;
 }
 a{
     text-decoration: none;

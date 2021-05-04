@@ -1,5 +1,5 @@
 <template >
-    <div v-anime="{ rotate: '1turn', color:'#fff', duration: 15000, loop: true,}" style="pointer-events:none;min-width:100px;min-height:100px;display:inline-block;"><p style="text-align:center;vertical-align: middle;color:#fff;font-size:1.5rem;">{{getEmoji}}</p></div>
+    <center><div v-anime="{ rotate: '1turn', color:'#fff', duration: 15000, loop: true,}" style="pointer-events:none;min-width:100px;min-height:100px;display:inline-block;z-index:1000;"><p style="text-align:center;vertical-align: middle;color:#fff;font-size:1.5rem;">{{getEmoji}}</p></div></center>
 </template>
 <script>
 export default {

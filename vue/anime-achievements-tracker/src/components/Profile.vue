@@ -1,6 +1,7 @@
 <template>
 <div>
     <navbar/>
+    <loading style="position:absolute;top:45%;right:47.5%;z-index:1000;" v-if="showloading"/>
     <ApolloQuery :query="require('../graphql/Profile.gql')" :variables="{username:username}">
     <template v-slot="{result:{loading,error,data}}">
         <template v-if="loading"><div><loading/></div></template>
@@ -55,12 +56,21 @@
                         <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Episodes Watched: '+data.profiles[0].stats[0].episodesWatched"></p></div>
                     </div>
                 </div>
-                <div id="achievements" style="position:relative;top:-16vh;">
+                <div id="achievements" style="position:relative;top:-16vh;cursor: pointer;" @click="showAchievements =! showAchievements">
                     <div class="grid-container-ach">
                         <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Achievements</h2></div>
                     </div>
                 </div>
-                <profileAchievements :data="data" :completed="completed" :username="username"/>
+                <profileAchievements :data="data" :completed="completed" :username="username" v-show="showAchievements"/>
+                <div id="charts" style="position:relative;top:-13vh;cursor: pointer;" @click="showCharts =! showCharts">
+                    <div class="grid-container-ach">
+                        <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Charts</h2></div>
+                    </div>
+                </div>
+                <div class="grid-container-charts" v-show="showCharts">
+                    <h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Genres</h2>
+                    <charts :username="username" :data="data" style="grid-column:2/ span 3;padding-top:23px"/>
+                </div>
             </div>
         </template>
     </template>
@@ -75,20 +85,22 @@ import axios from 'axios'
 import moment from 'moment'
 export default {
     name: "Profile",
-    components:{'loading':Loading,'profileAchievements':ProfileAchievements,'navbar':SearchBar},
+    components:{'loading':Loading,'profileAchievements':ProfileAchievements,'navbar':SearchBar,charts:()=>import('./chart')},
     props:['username'],
-    data(){
-        return{
-            alid:"",
-            completed:0,
-            dropped:0,
-            xp:0,
-            chuunibyou:0,
-            level:0,
-            lastUpdated:"",
-        }
-    },
+    data:()=>({
+        alid:"",
+        completed:0,
+        dropped:0,
+        xp:0,
+        chuunibyou:0,
+        level:0,
+        lastUpdated:"",
+        showCharts:false,
+        showAchievements:false,
+        showloading:false,
+    }),
     mounted(){
+        
         this.updateData();
     },
     updated(){
@@ -115,6 +127,7 @@ export default {
                 }
             }).then(updateRes=>{
                 if(updateRes.statusText == "OK"){
+                    this.showloading = true;
                     this.$notify({
                         group: 'adding',
                         text: `We are now updating that profile based on the data provided by AniList. The page will auto reload once its ready!`,
@@ -163,10 +176,15 @@ export default {
             this.level = result.data.data.profiles[0].level;
             this.lastUpdated = moment.unix(Number(result.data.data.profiles[0].lastupdated)).fromNow();
         })
-        }
+        },
     }
 }
 </script>
+<style scoped>
+body{
+    margin-bottom: 10vh;
+}
+</style>
 <style>
 *{
     font-family: Arial, Helvetica, sans-serif;
@@ -263,6 +281,20 @@ a{
     background-color: #334661;
     height: 70px;
     border-radius: 5px;
+}
+.grid-container-charts{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1em 1em;
+    grid-template-areas: ". ." ". ." ". .";
+    width: 85%;
+    margin: 0 auto;
+    background-color: #334661;
+    border-radius: 5px;
+    position: relative;
+    top: -10vh;
+    height: 50vh;
 }
 .grid-container-achievement {
     display: grid;

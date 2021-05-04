@@ -86,3 +86,9 @@ module.exports.Levels = mongoose.model("levels",{
     min:Number,
     max:Number
 });
+
+module.exports.searchedUsers = mongoose.model('searchedUsers',{
+    name:String,
+    profileSearch:Number,
+    compared:Number,
+});
