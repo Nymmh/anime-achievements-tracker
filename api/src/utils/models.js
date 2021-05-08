@@ -58,6 +58,9 @@ module.exports.ProfileStats = mongoose.model("profilestats",{
     musicFormatWatched:Number,
     followers:Number,
     likes:Number,
+    averageFormatScore:String,
+    averageGenreScore:String,
+    averageTagScore:String
 });
 
 module.exports.ProfileCompleteds = mongoose.model("profilecompleteds",{

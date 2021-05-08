@@ -1,0 +1,9 @@
+query($username:String){
+  profiles(username:$username){
+      stats{
+        averageFormatScore
+        averageGenreScore
+        averageTagScore
+      }
+  }
+}

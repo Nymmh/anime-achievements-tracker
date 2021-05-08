@@ -74,6 +74,9 @@ module.exports.typeDefs = gql`
         musicFormatWatched:Int
         followers:Int,
         likes:Int,
+        averageFormatScore:String,
+        averageGenreScore:String,
+        averageTagScore:String
     }
     type ProfileCompleted{
         alid:Int!

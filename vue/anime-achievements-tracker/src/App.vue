@@ -16,6 +16,13 @@ export default {
 *{
   box-sizing: border-box;
 }
+h2{
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+}
 p,h1,h2,label{
     color: #cadbec;
 }

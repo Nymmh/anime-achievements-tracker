@@ -71,7 +71,7 @@
                     <h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Genres</h2>
                     <charts :username="username" :data="data" style="grid-column:2/ span 3;padding-top:23px"/>
                 </div>
-                <div id="charts" style="position:relative;top:-10vh;cursor: pointer;" @click="showPopularity =! showPopularity" class="chartsmobile">
+                <div style="position:relative;top:-10vh;cursor: pointer;" @click="showPopularity =! showPopularity" class="chartsmobile">
                     <div class="grid-container-ach">
                         <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Popularity</h2></div>
                     </div>
@@ -81,10 +81,30 @@
                     <template v-if="loading"><div><loading/></div></template>
                     <template v-else-if="error">Error Loading</template>
                     <template v-else-if="data">
-                        <div id="Popularity" style="position:relative;top:-7vh;" class="mobileanime" v-show="showPopularity">
-                            <div class="grid-container-stats">
-                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Followers: '+data.profiles[0].stats[0].followers"></p></div>
-                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Likes: '+data.profiles[0].stats[0].likes"></p></div>
+                        <div id="Popularity" style="position:relative;top:-7vh;margin-bottom:3vh;" class="mobileanime" v-show="showPopularity">
+                            <div class="grid-container-xp">
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Followers: '+data.profiles[0].stats[0].followers"></p></div>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Likes: '+data.profiles[0].stats[0].likes"></p></div>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                </ApolloQuery>
+                <div id="profileScores" style="position:relative;top:-7vh;cursor: pointer;" @click="showScores =! showScores" class="chartsmobile">
+                    <div class="grid-container-ach">
+                        <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Scores</h2></div>
+                    </div>
+                </div>
+                <ApolloQuery :query="require('../graphql/getAverageScore.gql')" :variables="{username:username}">
+                <template v-slot="{result:{loading,error,data}}">
+                    <template v-if="loading"><div><loading/></div></template>
+                    <template v-else-if="error">Error Loading</template>
+                    <template v-else-if="data">
+                        <div id="Scores" style="position:relative;top:-4vh;" class="mobileanime" v-show="showScores">
+                            <div class="grid-container-xp">
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Average Format Score: '+data.profiles[0].stats[0].averageFormatScore"></p></div>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Average Genre Score: '+data.profiles[0].stats[0].averageGenreScore"></p></div>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Average Tag Score: '+data.profiles[0].stats[0].averageTagScore"></p></div>
                             </div>
                         </div>
                     </template>
@@ -119,6 +139,7 @@ export default {
         showAchievements:false,
         showloading:false,
         showPopularity:false,
+        showScores:false,
     }),
     mounted(){
         this.updateData();

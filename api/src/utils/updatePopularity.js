@@ -1,6 +1,6 @@
 let axios = require('axios');
 const { ProfileStats } = require('../utils/models');
-const updateStats = require('./updateProfilexp');
+const updateProfileScores = require('./updateProfileScores');
 exports.updatePopularity = (alid)=>{
     updatePopularity(alid,1,0)
 }
@@ -221,7 +221,7 @@ function getFollowers(alid,likecount){
             followers:followers
         },(err,data)=>{
             if(err)console.log(err)
-            else updateStats.updateProfilexp(alid);
+            else updateProfileScores.updateProfileScores(alid);
         })
     });
 }
