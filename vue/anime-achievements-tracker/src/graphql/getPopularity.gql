@@ -1,0 +1,8 @@
+query getPopularity($username:String){
+  profiles(username:$username){
+      stats{
+          followers
+          likes
+      }
+  }
+}
