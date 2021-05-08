@@ -65,7 +65,7 @@ a{
   z-index:1;
   color: #cadbec;
 }
-@media only screen and (max-width: 3840px){
+@media only screen and (min-width: 3839px) and (max-width: 3840px){
 .mobilesize{
 top: 8% !important;
 right: 32% !important;

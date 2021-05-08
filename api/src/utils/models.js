@@ -19,7 +19,8 @@ module.exports.Profiles = mongoose.model("profiles",{
     lastupdated:String,
     xp:Number,
     level:Number,
-    chuunibyou:Number
+    chuunibyou:Number,
+    updating:Boolean
 });
 
 module.exports.ProfileStats = mongoose.model("profilestats",{
@@ -55,6 +56,8 @@ module.exports.ProfileStats = mongoose.model("profilestats",{
     tvshortWatched:Number,
     onaWatched:Number,
     musicFormatWatched:Number,
+    followers:Number,
+    likes:Number,
 });
 
 module.exports.ProfileCompleteds = mongoose.model("profilecompleteds",{

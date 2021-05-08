@@ -8,7 +8,7 @@ function createProfile(username,alid){
         if(!err){
             if(!res[0]){
                 console.log('No profile, creating')
-                var newProfile = new Profiles({alid:alid,username:username,xp:0,level:0,chuunibyou:0}),
+                var newProfile = new Profiles({alid:alid,username:username,xp:0,level:0,chuunibyou:0,updating:true}),
                     newProfileCompleted = new ProfileCompleteds({alid:alid}),
                     newProfileStats = new ProfileStats({alid:alid});
                 newProfile.save().then(res=>{

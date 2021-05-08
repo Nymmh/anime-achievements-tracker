@@ -31,6 +31,7 @@ module.exports.typeDefs = gql`
         xp:Int
         level:Int
         chuunibyou:Int
+        updating:Boolean
         stats:[ProfileStats]
         achievements:[ProfileCompleted!]
     }
@@ -71,6 +72,8 @@ module.exports.typeDefs = gql`
         tvshortWatched:Int
         onaWatched:Int
         musicFormatWatched:Int
+        followers:Int,
+        likes:Int,
     }
     type ProfileCompleted{
         alid:Int!

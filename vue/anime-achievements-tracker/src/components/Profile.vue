@@ -95,12 +95,12 @@ export default {
         chuunibyou:0,
         level:0,
         lastUpdated:"",
+        updating:false,
         showCharts:false,
         showAchievements:false,
         showloading:false,
     }),
     mounted(){
-        
         this.updateData();
     },
     updated(){
@@ -133,7 +133,7 @@ export default {
                         text: `We are now updating that profile based on the data provided by AniList. The page will auto reload once its ready!`,
                         max:2
                     });
-                    setTimeout(()=>this.$router.go(),5000)
+                    this.checkUpdate(alid);
                 }else{
                     this.$notify({
                         group: 'failed',
@@ -141,7 +141,9 @@ export default {
                         max:2
                     });
                 }
-            });
+            }).then(()=>{
+                console.log("done updating")
+            })
         },
         updateData: function(){
             axios({
@@ -156,6 +158,7 @@ export default {
                             chuunibyou
                             level
                             lastupdated
+                            updating
                             stats{
                             completed
                             }
@@ -175,8 +178,43 @@ export default {
             this.chuunibyou = result.data.data.profiles[0].chuunibyou;
             this.level = result.data.data.profiles[0].level;
             this.lastUpdated = moment.unix(Number(result.data.data.profiles[0].lastupdated)).fromNow();
+            this.updating = result.data.data.profiles[0].updating;
+            if(this.updating){
+                this.$notify({
+                    group: 'adding',
+                    text: `This profile is currently being updated!`,
+                    max:2
+                });
+                this.showloading = true;
+                this.checkUpdate(result.data.data.profiles[0].alid);
+            }
         })
         },
+        checkUpdate: function(alid){
+            setTimeout(()=>{
+                axios({
+                    url:"https://anime-achievements-tracker.herokuapp.com/graphql",
+                    method:'post',
+                    data:{
+                        query:
+                            `query getCompleted($alid:Int){
+                                profiles(alid:$alid){
+                                    updating
+                                }
+                            }`,
+                        variables:{
+                            alid:alid
+                        }
+                    },
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                }).then(result=>{
+                    if(!result.data.data.profiles[0].updating)this.$router.go()
+                    else this.checkUpdate(alid);
+                })
+            },1500);
+        }
     }
 }
 </script>

@@ -30,7 +30,7 @@ const router = new Router({
             }
         },
         {
-            path: '/compare',
+            path: '/compare/:user1?/:user2?',
             name: 'Compare',
             props: true,
             component: ()=>import('./components/Compare.vue'),
@@ -42,10 +42,12 @@ const router = new Router({
     mode: 'history',
 });
 router.beforeResolve((to,from,next)=>{
+    let pageTitle = to.meta.title;
+    if(to.params.username)pageTitle = to.params.username+"'s profile"
     if(to.name){
         nProgress.start()
     }
-    document.title = to.meta.title;
+    document.title = pageTitle;
     next()
 });
 router.afterEach(()=>{nProgress.done()});

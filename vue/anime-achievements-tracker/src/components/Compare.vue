@@ -89,6 +89,7 @@ let listQuery = `query($username:String){
 export default {
     name: "Compare",
     components:{'navbar':SearchBar,'comparedata':CompareData},
+    props:['user1','user2'],
     data(){
         return{
             username1:"",
@@ -103,11 +104,19 @@ export default {
             loadingkey:0,
         }
     },
+    mounted(){
+        if(this.user1 && this.user2){
+            this.username1 = this.user1;
+            this.username2 = this.user2;
+            this.searchProfile()
+        }
+    },
     methods:{
         searchProfile: function(){
             if(this.username1 && this.username2){
                 this.loadingkey += 1;
                 this.loadingShow = true;
+                this.$router.push(`/compare/${this.username1}/${this.username2}`)
                 this.pageuserdata = false;
                 this.commonanime = {anime:[]};
                 this.userdata = {user1:{name:"",avatar:"",anime:{count:0,episodes:0,minutes:0,meanscore:0,planning:0,current:0,formats:[],genres:[]}},user2:{name:"",avatar:"",anime:{count:0,episodes:0,minutes:0,meanscore:0,planning:0,current:0,formats:[],genres:[]}}};

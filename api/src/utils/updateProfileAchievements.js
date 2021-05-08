@@ -1,5 +1,5 @@
 const {Achievements,ProfileCompleteds} = require('../utils/models');
-const updateStats = require('./updateProfilexp');
+const updatePopularity = require('./updatePopularity')
 exports.updateProfileAchievements = (alid,completedCount,droppedCount,mahouShoujoCount,actionCount,adventureCount,sliceOfLifeCount,fantasyCount,ecchiCount,mechaCount,mysteryCount)=>{
     updateProfileAchievements(alid,completedCount,droppedCount,mahouShoujoCount,actionCount,adventureCount,sliceOfLifeCount,fantasyCount,ecchiCount,mechaCount,mysteryCount)
 }
@@ -160,5 +160,5 @@ function updateProfileAchievements(alid,completedCount,droppedCount,mahouShoujoC
           }
         })
       }
-      updateStats.updateProfilexp(alid);
+      updatePopularity.updatePopularity(alid);
 }

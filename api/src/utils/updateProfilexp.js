@@ -42,14 +42,14 @@ function updateProfilexp(alid){
                         }
                         stars = i;
                         Levels.findOne({max:{$gte:xp}},(err,res)=>{
-                            Profiles.findOneAndUpdate({alid:alid},{xp:xp,level:res.level,chuunibyou:stars},{new:true},(err,res)=>{
+                            Profiles.findOneAndUpdate({alid:alid},{xp:xp,level:res.level,chuunibyou:stars,updating:false},{new:true},(err,res)=>{
 
                             });
                         });
                     }else{
                         Levels.findOne({max:{$gte:totalXP}},(err,res)=>{
                             level = res.level;
-                            Profiles.findOneAndUpdate({alid:alid},{xp:totalXP,level:level},{new:true},(err,res)=>{
+                            Profiles.findOneAndUpdate({alid:alid},{xp:totalXP,level:level,updating:false},{new:true},(err,res)=>{
     
                             });
                         });
@@ -58,7 +58,7 @@ function updateProfilexp(alid){
             }else{
                 xp = 0;
                 level = 0;
-                Profiles.findOneAndUpdate({alid:alid},{xp:xp,level:level},{new:true},(err,res)=>{
+                Profiles.findOneAndUpdate({alid:alid},{xp:xp,level:level,updating:false},{new:true},(err,res)=>{
 
                 });
             }
