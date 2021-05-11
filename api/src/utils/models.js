@@ -98,3 +98,8 @@ module.exports.searchedUsers = mongoose.model('searchedUsers',{
     profileSearch:Number,
     compared:Number,
 });
+
+module.exports.GlobalStats = mongoose.model('globals',{
+    name:String,
+    count:Number
+})

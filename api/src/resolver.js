@@ -1,4 +1,4 @@
-const {Achievements,Profiles,ProfileCompleteds,ProfileStats,Levels} = require('./utils/models');
+const {Achievements,Profiles,ProfileCompleteds,ProfileStats,Levels,GlobalStats} = require('./utils/models');
 const {updateProfile} = require('./utils/updateProfile');
 const {createProfile} = require('./utils/createProfile');
 module.exports = {
@@ -41,6 +41,17 @@ module.exports = {
                     return data
                 }else{
                     let data = Levels.find();
+                    return data
+                }
+            }
+        },
+        globalstats(parent,args,context,info){
+            if(args){
+                if(args.name){
+                    let data = GlobalStats.find({name:args.name});
+                    return data
+                }else{
+                    let data = GlobalStats.find();
                     return data
                 }
             }

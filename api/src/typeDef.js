@@ -5,6 +5,7 @@ module.exports.typeDefs = gql`
         achievements(type:AchievementsTypes,id:ID,name:String):[Achievements!]
         profiles(alid:Int,username:String):[Profile!]
         levels(level:Int):[Level]
+        globalstats(name:String):[GlobalStats]
     }
     type Mutation{
         updateProfile(alid:Int!):[Profile]
@@ -100,6 +101,10 @@ module.exports.typeDefs = gql`
         horrortier:String
         mechatier:String
         sportstier:String
+    }
+    type GlobalStats{
+        name:String,
+        count:Int
     }
     enum AchievementsTypes{
         PASSED

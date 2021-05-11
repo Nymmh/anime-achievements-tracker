@@ -50,8 +50,14 @@
                 </ApolloQuery>
                 <div id="animeStats" style="position:relative;top:-19vh;" class="mobileanime">
                     <div class="grid-container-stats">
-                        <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Anime</h2></div>
+                        <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;cursor: pointer;" @click="showAnimeStats =! showAnimeStats">Anime</h2></div>
+                    </div>
+                </div>
+                <div id="showAnimeStats" style="position:relative;top:-16vh;margin-bottom:3vh;" class="mobileanime" v-show="showAnimeStats">
+                    <div class="grid-container-xp" style="height:100%;">
                         <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Completed: '+data.profiles[0].stats[0].completed" ref="completedNumber"></p></div>
+                        <div style="padding-top:4.5%"><div class="meterxp xp nostripes"><span :style="'width: '+ ((data.profiles[0].stats[0].completed/totalAnime)*100) +'%'"></span></div></div>
+                        <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="((data.profiles[0].stats[0].completed/totalAnime)*100).toFixed(2) +'% of all anime completed'"></p></div>
                         <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Minutes Watched: '+data.profiles[0].stats[0].minutesWatched"></p></div>
                         <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Episodes Watched: '+data.profiles[0].stats[0].episodesWatched"></p></div>
                     </div>
@@ -134,12 +140,14 @@ export default {
         chuunibyou:0,
         level:0,
         lastUpdated:"",
+        totalAnime:0,
         updating:false,
         showCharts:false,
         showAchievements:false,
         showloading:false,
         showPopularity:false,
         showScores:false,
+        showAnimeStats:false,
     }),
     mounted(){
         this.updateData();
@@ -229,7 +237,28 @@ export default {
                 this.showloading = true;
                 this.checkUpdate(result.data.data.profiles[0].alid);
             }
+            this.getGlobalStats();
         })
+        },
+        getGlobalStats:function(){
+            axios({
+                url:"https://anime-achievements-tracker.herokuapp.com/graphql",
+                method:'post',
+                data:{
+                    query:
+                        `query{
+                            globalstats{
+                                name
+                                count
+                            }
+                        }`,
+                },
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            }).then(globalstats=>{
+                this.totalAnime = globalstats.data.data.globalstats[0].count;
+            })
         },
         checkUpdate: function(alid){
             setTimeout(()=>{
@@ -409,7 +438,7 @@ a{
     width: 85%;
     margin: 0 auto;
     background-color: #334661;
-    height: 130px;
+    height: 70px;
     border-radius: 5px;
 }
 .meter {
