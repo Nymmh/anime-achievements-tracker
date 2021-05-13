@@ -2,9 +2,9 @@
 import {Pie} from 'vue-chartjs'
 import axios from 'axios'
 export default {
-    name: 'chart',
+    name: 'genrechart',
+    props:['username'],
     extends: Pie,
-    props:['username','data'],
     data:()=>({
       magicalGirl:0,
       action:0,
@@ -37,10 +37,10 @@ export default {
       }
     }),
     mounted(){
-        this.updateChart();
+      this.updateChart();
     },
     updated(){
-        this.updateChart();
+      this.updateChart();
     },
     methods:{
       updateChart: function(){

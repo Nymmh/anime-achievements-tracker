@@ -77,7 +77,8 @@ module.exports.typeDefs = gql`
         likes:Int,
         averageFormatScore:String,
         averageGenreScore:String,
-        averageTagScore:String
+        averageTagScore:String,
+        scores:[Scores]
     }
     type ProfileCompleted{
         alid:Int!
@@ -101,6 +102,38 @@ module.exports.typeDefs = gql`
         horrortier:String
         mechatier:String
         sportstier:String
+    }
+    type Scores{
+        alid:Int,
+        scoreType:ScoreType,
+        score1:Int,
+        score2:Int,
+        score3:Int,
+        score4:Int,
+        score5:Int,
+        score6:Int,
+        score7:Int,
+        score8:Int,
+        score9:Int,
+        score10:Int,
+        score15:Int,
+        score20:Int,
+        score25:Int,
+        score30:Int,
+        score35:Int,
+        score40:Int,
+        score45:Int,
+        score50:Int,
+        score55:Int,
+        Score60:Int,
+        score65:Int,
+        score70:Int,
+        score75:Int,
+        score80:Int,
+        score85:Int,
+        score90:Int,
+        score95:Int,
+        score100:Int
     }
     type GlobalStats{
         name:String,
@@ -128,5 +161,12 @@ module.exports.typeDefs = gql`
         HORROR
         MECHA
         SPORTS
+    }
+    enum ScoreType{
+        POINT_100
+        POINT_3
+        POINT_10_DECIMAL
+        POINT_5
+        POINT_10
     }
 `;

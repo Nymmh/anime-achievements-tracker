@@ -1,4 +1,4 @@
-const {Achievements,Profiles,ProfileCompleteds,ProfileStats,Levels,GlobalStats} = require('./utils/models');
+const {Achievements,Profiles,ProfileCompleteds,ProfileStats,Levels,GlobalStats, Scores} = require('./utils/models');
 const {updateProfile} = require('./utils/updateProfile');
 const {createProfile} = require('./utils/createProfile');
 module.exports = {
@@ -76,6 +76,12 @@ module.exports = {
         },
         async stats(parent,args, context, info){
             let data = ProfileStats.find({alid:parent.alid});
+            return data
+        },
+    },
+    ProfileStats:{
+        async scores(parent,args,context,info){
+            let data = Scores.find({alid:parent.alid});
             return data
         }
     }

@@ -75,7 +75,9 @@
                 </div>
                 <div class="grid-container-charts" v-show="showCharts" style="padding-bottom:3vh;margin-bottom:3vh;">
                     <h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Genres</h2>
-                    <charts :username="username" :data="data" style="grid-column:2/ span 3;padding-top:23px"/>
+                    <genreChart :username="username" style="grid-column:2/ span 3;padding-top:23px;height:50vh"/>
+                    <h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Scores</h2>
+                    <scoreChart :username="username" style="grid-column:2/ span 3;padding-top:23px;height:50vh"/>
                 </div>
                 <div style="position:relative;top:-10vh;cursor: pointer;" @click="showPopularity =! showPopularity" class="chartsmobile">
                     <div class="grid-container-ach">
@@ -130,7 +132,7 @@ import axios from 'axios'
 import moment from 'moment'
 export default {
     name: "Profile",
-    components:{'loading':Loading,'profileAchievements':ProfileAchievements,'navbar':SearchBar,charts:()=>import('./chart')},
+    components:{'loading':Loading,'profileAchievements':ProfileAchievements,'navbar':SearchBar,genreChart:()=>import('./genreChart'),scoreChart:()=>import('./scoreChart')},
     props:['username'],
     data:()=>({
         alid:"",
@@ -147,7 +149,7 @@ export default {
         showloading:false,
         showPopularity:false,
         showScores:false,
-        showAnimeStats:false,
+        showAnimeStats:true,
     }),
     mounted(){
         this.updateData();
@@ -402,7 +404,7 @@ a{
     border-radius: 5px;
     position: relative;
     top: -10vh;
-    height: 50vh;
+    height: 100%;
 }
 .grid-container-achievement {
     display: grid;

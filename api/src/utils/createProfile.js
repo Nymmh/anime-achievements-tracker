@@ -1,4 +1,4 @@
-const {Profiles,ProfileCompleteds,ProfileStats} = require('../utils/models');
+const {Profiles,ProfileCompleteds,ProfileStats,Scores} = require('../utils/models');
 const updateProfile = require('./updateProfile');
 exports.createProfile = (username,alid)=>{
     createProfile(username,alid)
@@ -10,7 +10,8 @@ function createProfile(username,alid){
                 console.log('No profile, creating')
                 var newProfile = new Profiles({alid:alid,username:username,xp:0,level:0,chuunibyou:0,updating:true}),
                     newProfileCompleted = new ProfileCompleteds({alid:alid}),
-                    newProfileStats = new ProfileStats({alid:alid});
+                    newProfileStats = new ProfileStats({alid:alid}),
+                    newScores = new Scores({alid:alid});
                 newProfile.save().then(res=>{
                     console.log(res)
                     newProfileCompleted.save().then(res=>{
@@ -18,7 +19,10 @@ function createProfile(username,alid){
                         //send to update
                         newProfileStats.save().then(res=>{
                             console.log(res);
-                            updateProfile.updateProfile(alid)
+                            newScores.save().then(res=>{
+                                console.log(res);
+                                updateProfile.updateProfile(alid)
+                            });
                         });
                     })
                 })

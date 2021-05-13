@@ -102,4 +102,37 @@ module.exports.searchedUsers = mongoose.model('searchedUsers',{
 module.exports.GlobalStats = mongoose.model('globals',{
     name:String,
     count:Number
-})
+});
+
+module.exports.Scores = mongoose.model('profilescores',{
+    alid:Number,
+    scoreType:String,
+    score1:Number,
+    score2:Number,
+    score3:Number,
+    score4:Number,
+    score5:Number,
+    score6:Number,
+    score7:Number,
+    score8:Number,
+    score9:Number,    
+    score10:Number,
+    score15:Number,
+    score20:Number,
+    score25:Number,
+    score30:Number,
+    score35:Number,
+    score40:Number,
+    score45:Number,
+    score50:Number,
+    score55:Number,
+    Score60:Number,
+    score65:Number,
+    score70:Number,
+    score75:Number,
+    score80:Number,
+    score85:Number,
+    score90:Number,
+    score95:Number,
+    score100:Number
+});

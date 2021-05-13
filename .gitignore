@@ -4,3 +4,4 @@
 node_modules
 /vue/node_modules
 /vue/anime-achievements-tracker/dlist
+/uploadAPI*
