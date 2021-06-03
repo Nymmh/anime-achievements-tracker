@@ -51,19 +51,29 @@
                 </template>
                 </ApolloQuery>
                 <div class="sidebargrid">
-                    <div id="animeStats" style="position:relative;top:-12vh;grid-column: 1/1;cursor: pointer;" class="mobileanime" @click="showAnimeStats =! showAnimeStats;showAchievements = false;showCharts = false">
+                    <div id="animeStats" style="position:relative;top:-12vh;grid-column: 1/1;cursor: pointer;" class="mobileanime" @click="showAnimeStats =! showAnimeStats;showAchievements = false;showCharts = false;showAnimeList = false;showPlanningList=false;">
                         <div class="grid-container-stats">
                             <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:3%;cursor: pointer;">Anime</h2></div>
                         </div>
                     </div>
-                    <div id="achievements" style="position:relative;top:-3.3vh;cursor:pointer;grid-column: 1/1;" @click="showAchievements =! showAchievements;showAnimeStats = false;showCharts = false;" class="mobileachivements">
+                    <div id="achievements" style="position:relative;top:-3.3vh;cursor:pointer;grid-column: 1/1;" @click="showAchievements =! showAchievements;showAnimeStats = false;showCharts = false;showAnimeList = false;showPlanningList=false;" class="mobileachivements">
                         <div class="grid-container-ach">
                             <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:3%;">Achievements</h2></div>
                         </div>
                     </div>
-                    <div id="charts" style="position:relative;top:-2vh;cursor:pointer;grid-column: 1/1;" @click="showCharts =! showCharts;showAchievements = false;showAnimeStats = false;" class="chartsmobile">
+                    <div id="charts" style="position:relative;top:-2vh;cursor:pointer;grid-column: 1/1;" @click="showCharts =! showCharts;showAchievements = false;showAnimeStats = false;showAnimeList = false;showPlanningList=false;" class="chartsmobile">
                         <div class="grid-container-ach">
                             <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:3%;">Charts</h2></div>
+                        </div>
+                    </div>
+                    <div id="animelist" style="position:relative;top:-1vh;cursor:pointer;grid-column: 1/1;" @click="showAnimeList =! showAnimeList;showAchievements = false;showAnimeStats = false;showCharts=false;showPlanningList=false;" class="chartsmobile">
+                        <div class="grid-container-ach">
+                            <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:3%;">Completed List</h2></div>
+                        </div>
+                    </div>
+                    <div id="planninglist" style="position:relative;top:0vh;cursor:pointer;grid-column: 1/1;" @click="showPlanningList =! showPlanningList;showAchievements = false;showAnimeStats = false;showCharts=false;showAnimeList=false;" class="chartsmobile">
+                        <div class="grid-container-ach">
+                            <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:3%;">Planning List</h2></div>
                         </div>
                     </div>
                     <div style="grid-column: 2/2;grid-row:1;">
@@ -83,10 +93,12 @@
                         <profileAchievements :data="data" :completed="completed" :username="username" v-show="showAchievements" class="mobileachivementsarea"/>
                         <div class="grid-container-charts" v-show="showCharts" style="padding-bottom:3vh;margin-bottom:3vh;">
                             <h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Genres</h2>
-                            <genreChart :username="username" style="grid-column:2/ span 3;padding-top:23px;height:50vh"/>
+                            <genreChart :username="username" :key="genreChartKey" style="grid-column:2/ span 3;padding-top:23px;height:50vh"/>
                             <h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Scores</h2>
-                            <scoreChart :username="username" style="grid-column:2/ span 3;padding-top:23px;height:50vh"/>
+                            <scoreChart :username="username" :key="scoreChartKey" style="grid-column:2/ span 3;padding-top:23px;height:50vh"/>
                         </div>
+                        <AnimeList :key="AnimeListKey" :username="username" v-show="showAnimeList" class="mobileachivementsarea"/>
+                        <PlanningList :key="PlanningListKey" :username="username" v-show="showPlanningList" class="mobileachivementsarea"/>
                     </div>
                 </div>
             </div>
@@ -103,7 +115,7 @@ import axios from 'axios'
 import moment from 'moment'
 export default {
     name: "Profile",
-    components:{'loading':Loading,'profileAchievements':ProfileAchievements,'navbar':SearchBar,genreChart:()=>import('./genreChart'),scoreChart:()=>import('./scoreChart')},
+    components:{'loading':Loading,'profileAchievements':ProfileAchievements,'navbar':SearchBar,genreChart:()=>import('./genreChart'),scoreChart:()=>import('./scoreChart'),AnimeList:()=>import('./AnimeList'),PlanningList:()=>import('./PlanningList')},
     props:['username'],
     data:()=>({
         alid:"",
@@ -123,6 +135,12 @@ export default {
         showPopularity:false,
         showScores:false,
         showAnimeStats:true,
+        showAnimeList:false,
+        showPlanningList:false,
+        genreChartKey:0,
+        scoreChartKey:1,
+        AnimeListKey:2,
+        PlanningListKey:3,
     }),
     mounted(){
         this.updateData();
@@ -237,6 +255,10 @@ export default {
                 }
             }).then(globalstats=>{
                 this.totalAnime = globalstats.data.data.globalstats[0].count;
+                this.genreChartKey += 1;
+                this.scoreChartKey += 1;
+                this.AnimeListKey += 1;
+                this.PlanningListKey +=1;
             })
         },
         checkUpdate: function(alid){

@@ -6,6 +6,7 @@ export default {
     props:['username'],
     extends: Pie,
     data:()=>({
+      componentKey:0,
       magicalGirl:0,
       action:0,
       comedy:0,
@@ -37,9 +38,6 @@ export default {
       }
     }),
     mounted(){
-      this.updateChart();
-    },
-    updated(){
       this.updateChart();
     },
     methods:{

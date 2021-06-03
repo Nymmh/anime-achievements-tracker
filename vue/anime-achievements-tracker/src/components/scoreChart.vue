@@ -50,9 +50,6 @@ export default {
     mounted(){
         this.updateChart();
     },
-    updated(){
-        this.updateChart();
-    },
     methods:{
         updateChart: function(){
             axios({
