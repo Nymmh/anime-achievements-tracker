@@ -10,6 +10,9 @@ query Profile($username:String){
       completed
       minutesWatched
       episodesWatched
+      averageFormatScore
+      averageGenreScore
+      averageTagScore
     }
     achievements{
       alid

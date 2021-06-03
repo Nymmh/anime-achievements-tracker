@@ -34,90 +34,61 @@
                     <template v-else-if="error">Error Loading</template>
                     <template v-else-if="data">
                         <div style="margin:0;">
-                            <div id="xparea" class="grid-container-xp">
+                            <div id="xparea" class="grid-container-xp" style="height:100%;">
                                 <p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Level: '+level"></p>
                                 <template v-if="((xp/data.levels[0].max)*100)>100">
                                     <div style="padding-top:4.5%"><div class="meterxp xp nostripes"><span :style="'width: 100%'"></span></div></div>
                                 </template>
                                 <template v-else>
-                                    <div style="padding-top:4.5%"><div class="meterxp xp nostripes"><span :style="'width: '+ ((xp/data.levels[0].max)*100) +'%'"></span></div></div>
+                                    <div style="padding-top:4.5%"><div class="meterxp xp nostripes"><span :style="'width: '+ ((xp/data.levels[0].max)*100) +'%'"></span></div><span style="color:#cadbec;" v-text="xp+' xp / '+data.levels[0].max+' xp'"></span></div>
                                 </template>
                                 <p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Chuunibyou: '+chuunibyou"></p>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Followers: '+followers"></p></div>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Likes: '+likes"></p></div>
                             </div>
                         </div>
                     </template>
                 </template>
                 </ApolloQuery>
-                <div id="animeStats" style="position:relative;top:-19vh;" class="mobileanime">
-                    <div class="grid-container-stats">
-                        <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;cursor: pointer;" @click="showAnimeStats =! showAnimeStats">Anime</h2></div>
+                <div class="sidebargrid">
+                    <div id="animeStats" style="position:relative;top:-12vh;grid-column: 1/1;cursor: pointer;" class="mobileanime" @click="showAnimeStats =! showAnimeStats;showAchievements = false;showCharts = false">
+                        <div class="grid-container-stats">
+                            <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:3%;cursor: pointer;">Anime</h2></div>
+                        </div>
                     </div>
-                </div>
-                <div id="showAnimeStats" style="position:relative;top:-16vh;margin-bottom:3vh;" class="mobileanime" v-show="showAnimeStats">
-                    <div class="grid-container-xp" style="height:100%;">
-                        <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Completed: '+data.profiles[0].stats[0].completed" ref="completedNumber"></p></div>
-                        <div style="padding-top:4.5%"><div class="meterxp xp nostripes"><span :style="'width: '+ ((data.profiles[0].stats[0].completed/totalAnime)*100) +'%'"></span></div></div>
-                        <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="((data.profiles[0].stats[0].completed/totalAnime)*100).toFixed(2) +'% of all anime completed'"></p></div>
-                        <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Minutes Watched: '+data.profiles[0].stats[0].minutesWatched"></p></div>
-                        <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Episodes Watched: '+data.profiles[0].stats[0].episodesWatched"></p></div>
+                    <div id="achievements" style="position:relative;top:-3.3vh;cursor:pointer;grid-column: 1/1;" @click="showAchievements =! showAchievements;showAnimeStats = false;showCharts = false;" class="mobileachivements">
+                        <div class="grid-container-ach">
+                            <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:3%;">Achievements</h2></div>
+                        </div>
                     </div>
-                </div>
-                <div id="achievements" style="position:relative;top:-16vh;cursor: pointer;" @click="showAchievements =! showAchievements" class="mobileachivements">
-                    <div class="grid-container-ach">
-                        <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Achievements</h2></div>
+                    <div id="charts" style="position:relative;top:-2vh;cursor:pointer;grid-column: 1/1;" @click="showCharts =! showCharts;showAchievements = false;showAnimeStats = false;" class="chartsmobile">
+                        <div class="grid-container-ach">
+                            <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:3%;">Charts</h2></div>
+                        </div>
                     </div>
-                </div>
-                <profileAchievements :data="data" :completed="completed" :username="username" v-show="showAchievements" class="mobileachivementsarea"/>
-                <div id="charts" style="position:relative;top:-13vh;cursor: pointer;" @click="showCharts =! showCharts" class="chartsmobile">
-                    <div class="grid-container-ach">
-                        <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Charts</h2></div>
-                    </div>
-                </div>
-                <div class="grid-container-charts" v-show="showCharts" style="padding-bottom:3vh;margin-bottom:3vh;">
-                    <h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Genres</h2>
-                    <genreChart :username="username" style="grid-column:2/ span 3;padding-top:23px;height:50vh"/>
-                    <h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Scores</h2>
-                    <scoreChart :username="username" style="grid-column:2/ span 3;padding-top:23px;height:50vh"/>
-                </div>
-                <div style="position:relative;top:-10vh;cursor: pointer;" @click="showPopularity =! showPopularity" class="chartsmobile">
-                    <div class="grid-container-ach">
-                        <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Popularity</h2></div>
-                    </div>
-                </div>
-                <ApolloQuery :query="require('../graphql/getPopularity.gql')" :variables="{username:username}">
-                <template v-slot="{result:{loading,error,data}}">
-                    <template v-if="loading"><div><loading/></div></template>
-                    <template v-else-if="error">Error Loading</template>
-                    <template v-else-if="data">
-                        <div id="Popularity" style="position:relative;top:-7vh;margin-bottom:3vh;" class="mobileanime" v-show="showPopularity">
-                            <div class="grid-container-xp">
-                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Followers: '+data.profiles[0].stats[0].followers"></p></div>
-                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Likes: '+data.profiles[0].stats[0].likes"></p></div>
+                    <div style="grid-column: 2/2;grid-row:1;">
+                        <div id="showAnimeStats" style="position:relative;top:-12vh;margin-bottom:3vh;" class="mobileanime" v-show="showAnimeStats">
+                            <div class="grid-container-xp" style="height:100%;width:97.5%;float:right;">
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Completed: '+data.profiles[0].stats[0].completed" ref="completedNumber"></p></div>
+                                <div style="padding-top:4.5%"><div class="meterxp xp nostripes"><span :style="'width: '+ ((data.profiles[0].stats[0].completed/totalAnime)*100) +'%'"></span></div></div>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="((data.profiles[0].stats[0].completed/totalAnime)*100).toFixed(2) +'% of all anime completed'"></p></div>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Minutes Watched: '+data.profiles[0].stats[0].minutesWatched"></p></div>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;" v-text="'Episodes Watched: '+data.profiles[0].stats[0].episodesWatched"></p></div>
+                                <div/>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;padding-bottom: 3%;" v-text="'Average Format Score: '+data.profiles[0].stats[0].averageFormatScore"></p></div>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;padding-bottom: 3%;" v-text="'Average Genre Score: '+data.profiles[0].stats[0].averageGenreScore"></p></div>
+                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:3%;padding-bottom: 3%;" v-text="'Average Tag Score: '+data.profiles[0].stats[0].averageTagScore"></p></div>
                             </div>
                         </div>
-                    </template>
-                </template>
-                </ApolloQuery>
-                <div id="profileScores" style="position:relative;top:-7vh;cursor: pointer;" @click="showScores =! showScores" class="chartsmobile">
-                    <div class="grid-container-ach">
-                        <div style="grid-column: 1 / 4;"><h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Scores</h2></div>
+                        <profileAchievements :data="data" :completed="completed" :username="username" v-show="showAchievements" class="mobileachivementsarea"/>
+                        <div class="grid-container-charts" v-show="showCharts" style="padding-bottom:3vh;margin-bottom:3vh;">
+                            <h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Genres</h2>
+                            <genreChart :username="username" style="grid-column:2/ span 3;padding-top:23px;height:50vh"/>
+                            <h2 style="font-size: 2rem;margin:auto;padding-top:1%;">Scores</h2>
+                            <scoreChart :username="username" style="grid-column:2/ span 3;padding-top:23px;height:50vh"/>
+                        </div>
                     </div>
                 </div>
-                <ApolloQuery :query="require('../graphql/getAverageScore.gql')" :variables="{username:username}">
-                <template v-slot="{result:{loading,error,data}}">
-                    <template v-if="loading"><div><loading/></div></template>
-                    <template v-else-if="error">Error Loading</template>
-                    <template v-else-if="data">
-                        <div id="Scores" style="position:relative;top:-4vh;" class="mobileanime" v-show="showScores">
-                            <div class="grid-container-xp">
-                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Average Format Score: '+data.profiles[0].stats[0].averageFormatScore"></p></div>
-                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Average Genre Score: '+data.profiles[0].stats[0].averageGenreScore"></p></div>
-                                <div><p style="font-size: 1.5rem;margin:auto;padding-top:4%;" v-text="'Average Tag Score: '+data.profiles[0].stats[0].averageTagScore"></p></div>
-                            </div>
-                        </div>
-                    </template>
-                </template>
-                </ApolloQuery>
             </div>
         </template>
     </template>
@@ -141,6 +112,8 @@ export default {
         xp:0,
         chuunibyou:0,
         level:0,
+        followers:0,
+        likes:0,
         lastUpdated:"",
         totalAnime:0,
         updating:false,
@@ -211,7 +184,9 @@ export default {
                             lastupdated
                             updating
                             stats{
-                            completed
+                                completed
+                                followers
+                                likes
                             }
                         }
                     }`,
@@ -226,6 +201,8 @@ export default {
             this.alid = result.data.data.profiles[0].alid;
             this.completed = result.data.data.profiles[0].stats[0].completed;
             this.xp = result.data.data.profiles[0].xp;
+            this.followers = result.data.data.profiles[0].stats[0].followers;
+            this.likes = result.data.data.profiles[0].stats[0].likes;
             this.chuunibyou = result.data.data.profiles[0].chuunibyou;
             this.level = result.data.data.profiles[0].level;
             this.lastUpdated = moment.unix(Number(result.data.data.profiles[0].lastupdated)).fromNow();
@@ -386,7 +363,7 @@ a{
     grid-template-rows: 1fr;
     gap: 1em 1em;
     grid-template-areas: ". ." ". ." ". .";
-    width: 85%;
+    width: 100%;
     margin: 0 auto;
     background-color: #334661;
     height: 70px;
@@ -394,17 +371,20 @@ a{
 }
 .grid-container-charts{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 1em 1em;
     grid-template-areas: ". ." ". ." ". .";
-    width: 85%;
+    width: 97.5%;
+    float: right;
     margin: 0 auto;
     background-color: #334661;
     border-radius: 5px;
     position: relative;
-    top: -10vh;
+    top: -12vh;
     height: 100%;
+    min-height: 105vh;
+    max-height: 150vh;
 }
 .grid-container-achievement {
     display: grid;
@@ -437,18 +417,34 @@ a{
     ". ."
     ". ."
     ". .";
-    width: 85%;
+    width: 100%;
     margin: 0 auto;
     background-color: #334661;
     height: 70px;
     border-radius: 5px;
+}
+.sidebargrid{
+    display: grid;
+    grid-template-columns: minmax(0,1fr)70%;
+    grid-template-rows: minmax(0,1fr)70px;
+    gap: 1em 0em;
+    grid-template-areas:
+    ". ."
+    ". ."
+    ". .";
+    width: 85%;
+    margin: 0 auto;
+    height: 70px;
+    border-radius: 5px;
+    min-width: 0;
+    max-height: 0;
 }
 .meter {
     box-sizing: content-box;
     height: 20px; /* Can be anything */
     position: relative;
     background: #555;
-    border-radius: 25px;
+    border-radius: 0px;
     padding: 10px;
     box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
 }
@@ -457,17 +453,17 @@ a{
     height: 20px;
     position: relative;
     background: transparent;
-    border-radius: 25px;
+    border-radius: 0px;
     padding: 0;
     border: 1px solid black;
 }
 .meter > span {
     display: block;
     height: 100%;
-    border-top-right-radius: 8px;
+    /* border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-bottom-left-radius: 20px; */
     background-color: rgb(43, 194, 83);
     background-image: linear-gradient(
         center bottom,
@@ -482,10 +478,10 @@ a{
 .meterxp > span {
     display: block;
     height: 100%;
-    border-top-right-radius: 20px;
+    /* border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-bottom-left-radius: 20px; */
     position: relative;
     overflow: hidden;
 }

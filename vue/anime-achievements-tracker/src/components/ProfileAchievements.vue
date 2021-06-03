@@ -1,5 +1,5 @@
 <template>
-    <div style="position:relative;top:-13vh;padding-bottom:3vh;"><div v-for="ach in data.profiles[0].achievements" :key="ach._id" class="grid-container-achievements">
+    <div style="position:relative;top:-12vh;padding-bottom:3vh;"><div v-for="ach in data.profiles[0].achievements" :key="ach._id" class="grid-container-achievements">
         <ApolloQuery :query="require('../graphql/singleAchievement.gql')" :variables="{id:ach.passedtier}">
             <template v-slot="{result:{loading,error,data}}">
                 <template v-if="loading"><div><loading/></div></template>
@@ -663,14 +663,15 @@ export default {
 <style lang="css" scoped>
 .grid-container-achievements{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 5em 1.15em;
-    width: 85%;
+    width: 97.5%;
     margin: 0 auto;
     background-color: #334661;
     border-radius: 5px;
     padding: 1%;
+    float: right;
 }
 .achievement{
     background-color: #2c3e50;
@@ -703,7 +704,7 @@ export default {
     height: 20px;
     position: relative;
     background: transparent;
-    border-radius: 25px;
+    border-radius: 0px;
     padding: 0;
     border: 1px solid black;
     grid-column: 1 / 3;
@@ -711,10 +712,10 @@ export default {
 .meterxp > span {
     display: block;
     height: 100%;
-    border-top-right-radius: 20px;
+    /* border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-bottom-left-radius: 20px; */
     position: relative;
     overflow: inherit;
 }
